@@ -55,8 +55,6 @@ int main(int argc, char* argv[])
             std::string reg;
             size_t searchIndex = 0;
 
-            reg.find(reg[0]);
-
             //While for looping through strings passed for testing. One iteration for normal function
             while (!TEST_MODE_REG_SEARCH && searchIndex != 1 || TEST_MODE_REG_SEARCH && searchIndex != testRegList.size())
             {
