@@ -7,11 +7,10 @@
 class VehicleInfo
 {
 public:
-	VehicleInfo();
+	VehicleInfo(const std::string regNum = "", const size_t year = NULL, const int vID = NULL);
 	~VehicleInfo();
-	VehicleInfo CreateVehicleEntry(const std::string regNum = "", const size_t year = NULL, const int vID = NULL);
-	size_t VehicleCount(const std::vector<VehicleInfo> vVehicleList);
-	int FindVehicle(const std::vector<VehicleInfo> vVehicleList, const std::string regNum);
+	static size_t VehicleCount(const std::vector<VehicleInfo> vVehicleList);
+	static int FindVehicle(const std::vector<VehicleInfo> vVehicleList, const std::string regNum);
 private:
 	
 	std::string m_registrationNumber;

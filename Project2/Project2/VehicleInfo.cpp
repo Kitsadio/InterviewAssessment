@@ -1,10 +1,10 @@
 #include "VehicleInfo.h"
 
-VehicleInfo::VehicleInfo()
+VehicleInfo::VehicleInfo(const std::string regNum, const size_t year, const int vID)
 {
-	m_registrationNumber = "";
-	m_vear = 0;
-	m_vehicleID = 0;
+	m_registrationNumber = regNum;
+	m_vear = year;
+	m_vehicleID = vID;
 }
 
 VehicleInfo::~VehicleInfo()
@@ -12,17 +12,6 @@ VehicleInfo::~VehicleInfo()
 	m_registrationNumber.clear();
 	m_vear = NULL;
 	m_vehicleID = NULL;
-}
-
-VehicleInfo VehicleInfo::CreateVehicleEntry(const std::string regNum, const size_t year, const int vID)
-{
-	VehicleInfo newCar;
-
-	newCar.m_registrationNumber = regNum;
-	newCar.m_vear = year;
-	newCar.m_vehicleID = vID;
-
-	return newCar;
 }
 
 size_t VehicleInfo::VehicleCount(const std::vector<VehicleInfo> vVehicleList)

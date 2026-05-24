@@ -14,15 +14,13 @@ enum argIndexes
 
 int main(int argc, char* argv[])
 {
-    VehicleInfo VehicleObj;
-
     std::vector<VehicleInfo> vVehicleList;
     std::vector<std::string> testRegList;
 
-    vVehicleList.push_back(VehicleObj.CreateVehicleEntry("AB01 CDE", 2001, 12345));
-    vVehicleList.push_back(VehicleObj.CreateVehicleEntry("EG02 HJK", 2002, 67890));
-    vVehicleList.push_back(VehicleObj.CreateVehicleEntry("L33T H4XOR", 2022));
-    vVehicleList.push_back(VehicleObj.CreateVehicleEntry());
+    vVehicleList.push_back(VehicleInfo("AB01 CDE", 2001, 12345));
+    vVehicleList.push_back(VehicleInfo("EG02 HJK", 2002, 67890));
+    vVehicleList.push_back(VehicleInfo("L33T H4XOR", 2022));
+    vVehicleList.push_back(VehicleInfo());
     
     if (argc > COMMAND_INDEX && std::strcmp(argv[COMMAND_INDEX], "TestRegSearch") == 0)
     {
@@ -39,7 +37,7 @@ int main(int argc, char* argv[])
 
     if ((argc > COMMAND_INDEX && std::strcmp(argv[COMMAND_INDEX],"RegCount") == 0))
     {
-        size_t count = VehicleObj.VehicleCount(vVehicleList);
+        size_t count = VehicleInfo::VehicleCount(vVehicleList);//VehicleObj.VehicleCount(vVehicleList);
         std::cout << "Total Registration Numbers = " << count << std::endl;
     }
     else if (TEST_MODE_REG_SEARCH || (argc > SEARCH_VAR_INDEX && std::strcmp(argv[COMMAND_INDEX], "FindID") == 0))
@@ -53,12 +51,7 @@ int main(int argc, char* argv[])
             std::string reg;
             size_t searchIndex = 0;
 
-            if (TEST_MODE_REG_SEARCH)
-            {
-                searchIndex = testRegList.size()-1;
-            }
-
-            while (searchIndex != -1)
+            while (!TEST_MODE_REG_SEARCH && searchIndex != 1 || TEST_MODE_REG_SEARCH && searchIndex != testRegList.size())
             {
                 if (TEST_MODE_REG_SEARCH)
                 {
@@ -70,7 +63,7 @@ int main(int argc, char* argv[])
                     reg = argv[SEARCH_VAR_INDEX];
                 }
 
-                int vID = VehicleObj.FindVehicle(vVehicleList, reg);
+                int vID = VehicleInfo::FindVehicle(vVehicleList, reg);
 
                 if (vID == -1)
                 {
@@ -80,7 +73,7 @@ int main(int argc, char* argv[])
                 {
                     std::cout << "VehicleID Found = " << vID << std::endl;
                 }
-                searchIndex--;
+                searchIndex++;
             }
         }
     }
